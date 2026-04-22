@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="doc">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mailchimp.com Midmarket Sales — Voice of Customer Report</title>
+<style>
+  :root {
+    --mc-bg: #EFEDE9;
+    --mc-surface: #ffffff;
+    --mc-surface-2: #f7f6f3;
+    --mc-border: #e1ddd6;
+    --mc-text: #241C15;
+    --mc-text-muted: #6b6560;
+    --mc-accent: #FFE01B;
+    --mc-accent-hover: #E5C900;
+    --mc-accent-text: #241C15;
+    --mc-accent-subtle: rgba(255, 224, 27, .18);
+    --mc-positive: #059669;
+    --mc-positive-bg: #ecfdf5;
+    --mc-negative: #dc2626;
+    --mc-negative-bg: #fef2f2;
+    --mc-amber: #d97706;
+    --mc-amber-bg: #fffbeb;
+    --mc-blue: #2563eb;
+    --mc-purple: #7c3aed;
+    --mc-radius: 12px;
+    --mc-radius-sm: 8px;
+    --mc-radius-badge: 10px;
+    --mc-font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --mc-font-mono: ui-monospace, 'SF Mono', Monaco, Menlo, Consolas, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-family: var(--mc-font); font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { background: var(--mc-bg); color: var(--mc-text); line-height: 1.6; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: linear-gradient(135deg, #FFE01B 0%, #FFD600 100%);
+    color: #241C15;
+    padding: 56px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    right: -80px;
+    top: -80px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(36,28,21,.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner { max-width: 900px; margin: 0 auto; position: relative; }
+  .hero-eyebrow {
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    opacity: .75;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .hero p.hero-sub {
+    font-size: 1.05rem;
+    line-height: 1.5;
+    max-width: 700px;
+    margin-bottom: 24px;
+  }
+  .hero-meta {
+    display: flex; gap: 20px; flex-wrap: wrap;
+    font-size: .82rem;
+    font-weight: 600;
+  }
+  .hero-meta span { display: inline-flex; align-items: center; gap: 6px; }
+
+  /* ---------- Container ---------- */
+  .report {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 48px 64px;
+  }
+
+  /* ---------- Table of contents ---------- */
+  .toc {
+    background: var(--mc-surface);
+    border: 1px solid var(--mc-border);
+    border-radius: var(--mc-radius);
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .toc-label {
+    grid-column: 1 / -1;
+    font-size: .72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--mc-text-muted);
+    margin-bottom: 4px;
+  }
+  .toc a {
+    color: var(--mc-text);
+    text-decoration: none;
+    font-size: .88rem;
+    padding: 6px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color .15s;
+  }
+  .toc a:hover { border-bottom-color: var(--mc-accent); }
+
+  /* ---------- Exec summary ---------- */
+  .exec {
+    background: var(--mc-surface);
+    border-left: 4px solid var(--mc-accent);
+    border-radius: 0 var(--mc-radius) var(--mc-radius) 0;
+    padding: 24px 28px;
+    margin-bottom: 40px;
+    box-shadow: 0 1px 2px rgba(36,28,21,.04);
+  }
+  .exec h2 {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    border: none !important;
+    padding: 0 !important;
+  }
+  .exec ol { margin: 8px 0 0 20px; }
+  .exec li { margin-bottom: 8px; font-size: .95rem; }
+
+  /* ---------- KPI strip ---------- */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    margin: 0 0 40px;
+  }
+  .kpi {
+    background: var(--mc-surface);
+    border: 1px solid var(--mc-border);
+    border-radius: var(--mc-radius);
+    padding: 18px 18px 16px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--mc-accent);
+  }
+  .kpi-icon { font-size: 1.6rem; margin-bottom: 6px; display: block; }
+  .kpi-label {
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--mc-text-muted);
+    margin-bottom: 4px;
+  }
+  .kpi-value {
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  /* ---------- Section ---------- */
+  .section { margin-bottom: 44px; }
+  .section h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--mc-border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section h2 .section-num {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    width: 30px; height: 30px;
+    background: var(--mc-accent);
+    color: var(--mc-accent-text);
+    border-radius: 50%;
+    font-size: .85rem;
+    font-weight: 800;
+  }
+  .section h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--mc-text);
+    margin: 22px 0 10px;
+    letter-spacing: -0.005em;
+  }
+  .section p { font-size: .95rem; margin-bottom: 14px; line-height: 1.65; }
+  .section ul, .section ol { font-size: .95rem; margin: 0 0 14px 24px; line-height: 1.6; }
+  .section li { margin-bottom: 6px; }
+  .section strong { font-weight: 700; }
+
+  /* ---------- Quote block ---------- */
+  blockquote {
+    background: var(--mc-surface);
+    border-left: 4px solid var(--mc-accent);
+    padding: 16px 22px;
+    margin: 14px 0 18px;
+    border-radius: 0 var(--mc-radius-sm) var(--mc-radius-sm) 0;
+    font-style: italic;
+    font-size: .95rem;
+    line-height: 1.6;
+    color: var(--mc-text);
+    box-shadow: 0 1px 2px rgba(36,28,21,.03);
+    position: relative;
+  }
+  blockquote::before {
+    content: "\201C";
+    position: absolute;
+    top: 4px; left: 8px;
+    font-size: 2.6rem;
+    color: var(--mc-accent);
+    line-height: 1;
+    font-family: Georgia, serif;
+    opacity: .4;
+  }
+  blockquote p { margin-bottom: 6px; padding-left: 28px; }
+  blockquote cite {
+    display: block;
+    font-style: normal;
+    font-size: .78rem;
+    color: var(--mc-text-muted);
+    margin-top: 8px;
+    padding-left: 28px;
+  }
+  blockquote cite strong { color: var(--mc-text); font-weight: 600; }
+
+  /* ---------- Citation chips ---------- */
+  .cite {
+    display: inline-block;
+    background: var(--mc-accent-subtle);
+    color: var(--mc-text);
+    font-size: .7rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 6px;
+    text-decoration: none;
+    vertical-align: super;
+    line-height: 1.4;
+    margin: 0 1px;
+    transition: background .15s;
+  }
+  .cite:hover { background: var(--mc-accent); }
+
+  /* ---------- Theme cards ---------- */
+  .theme-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin: 16px 0 24px;
+  }
+  .theme-card {
+    background: var(--mc-surface);
+    border: 1px solid var(--mc-border);
+    border-radius: var(--mc-radius);
+    padding: 18px 20px;
+    transition: border-color .15s, transform .15s;
+  }
+  .theme-card:hover { border-color: var(--mc-accent); transform: translateY(-1px); }
+  .theme-card-head {
+    display: flex; align-items: center; gap: 8px;
+    font-size: .72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--mc-text-muted);
+    margin-bottom: 10px;
+  }
+  .theme-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .theme-card p { font-size: .85rem; color: var(--mc-text-muted); line-height: 1.5; margin: 0; }
+
+  /* ---------- Tables ---------- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--mc-surface);
+    border-radius: var(--mc-radius-sm);
+    overflow: hidden;
+    font-size: .85rem;
+    margin: 14px 0 20px;
+    box-shadow: 0 1px 2px rgba(36,28,21,.03);
+  }
+  thead th {
+    background: #241C15;
+    color: #ffffff;
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    padding: 12px 14px;
+    text-align: left;
+  }
+  thead th.num { text-align: right; }
+  tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--mc-border);
+    vertical-align: top;
+    font-size: .85rem;
+    line-height: 1.5;
+  }
+  tbody tr:nth-child(even) { background: var(--mc-surface-2); }
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* ---------- Methodology box ---------- */
+  .methodology {
+    background: var(--mc-surface);
+    border: 1px solid var(--mc-border);
+    border-radius: var(--mc-radius);
+    padding: 24px 28px;
+    margin: 20px 0;
+  }
+  .methodology h3 { margin-top: 0; font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: var(--mc-text-muted); }
+  .methodology ul { margin-left: 20px; }
+  .methodology code {
+    font-family: var(--mc-font-mono);
+    font-size: .78rem;
+    background: var(--mc-surface-2);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+  pre {
+    background: #241C15;
+    color: #EFEDE9;
+    padding: 16px 20px;
+    border-radius: var(--mc-radius-sm);
+    font-family: var(--mc-font-mono);
+    font-size: .78rem;
+    overflow-x: auto;
+    line-height: 1.5;
+    margin: 12px 0;
+  }
+  pre code { background: none; padding: 0; color: inherit; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    text-align: center;
+    padding: 32px 48px 48px;
+    color: var(--mc-text-muted);
+    font-size: .78rem;
+    border-top: 1px solid var(--mc-border);
+    margin-top: 40px;
+    background: var(--mc-surface);
+  }
+  footer .brand { font-weight: 700; color: var(--mc-text); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 720px) {
+    .hero { padding: 40px 24px 32px; }
+    .hero h1 { font-size: 1.7rem; }
+    .report { padding: 28px 20px 48px; }
+    .section h2 { font-size: 1.15rem; }
+    blockquote { padding: 14px 18px; }
+    blockquote::before { font-size: 2.2rem; }
+    blockquote p, blockquote cite { padding-left: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== HERO ============== -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">🎯 Voice of Customer Report</div>
+    <h1>Mailchimp.com Midmarket Sales</h1>
+    <p class="hero-sub">
+      Qualitative signals from prospects and customers on the midmarket sales journey —
+      pricing pages, contact-sales flows, demos, sales-assisted onboarding, and the
+      site-to-sales handoff.
+    </p>
+    <div class="hero-meta">
+      <span>👤 Daniel Rocha · Web Growth</span>
+      <span>📅 April 22, 2026</span>
+      <span>🗂️ HeyMarvin · 10+ projects</span>
+    </div>
+  </div>
+</header>
+
+<main class="report">
+
+  <!-- ============== TOC ============== -->
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-label">In this report</div>
+    <a href="#summary">📌 Executive Summary</a>
+    <a href="#pricing">💰 Pricing &amp; Plan Confusion</a>
+    <a href="#contact-sales">📞 Contact-Sales Path</a>
+    <a href="#assisted">🤝 Sales-Assisted Onboarding</a>
+    <a href="#gaps">🧱 Product Gaps Driving Churn</a>
+    <a href="#recs">✅ Recommendations</a>
+    <a href="#methodology">🔬 Methodology</a>
+    <a href="#bibliography">📚 Bibliography</a>
+  </nav>
+
+  <!-- ============== KPI STRIP ============== -->
+  <section class="kpi-grid" aria-label="Report at a glance">
+    <div class="kpi">
+      <span class="kpi-icon">🗣️</span>
+      <div class="kpi-label">Primary Friction</div>
+      <div class="kpi-value">Pricing confusion</div>
+    </div>
+    <div class="kpi">
+      <span class="kpi-icon">🔍</span>
+      <div class="kpi-label">Sales Discoverability</div>
+      <div class="kpi-value">Low</div>
+    </div>
+    <div class="kpi">
+      <span class="kpi-icon">💎</span>
+      <div class="kpi-label">Differentiator</div>
+      <div class="kpi-value">Human onboarding</div>
+    </div>
+    <div class="kpi">
+      <span class="kpi-icon">📚</span>
+      <div class="kpi-label">Sources cited</div>
+      <div class="kpi-value">11 verbatim</div>
+    </div>
+  </section>
+
+  <!-- ============== EXEC SUMMARY ============== -->
+  <section class="exec" id="summary">
+    <h2>📌 Executive Summary</h2>
+    <p>
+      Midmarket prospects arrive at mailchimp.com with strong brand trust but struggle
+      to self-serve their way through the site. Five themes dominate the VoC record:
+    </p>
+    <ol>
+      <li><strong>Pricing is the #1 acquisition friction</strong> — plan options are overwhelming, tier-by-tier differences unclear, and dynamic list-size pricing creates bill-shock anxiety.<a class="cite" href="#r1">1</a><a class="cite" href="#r5">5</a><a class="cite" href="#r6">6</a></li>
+      <li><strong>Prospects want human help earlier</strong> — but the path to sales is buried; prospects who do connect value industry-specific proof points.<a class="cite" href="#r2">2</a><a class="cite" href="#r3">3</a><a class="cite" href="#r4">4</a></li>
+      <li><strong>Sales-assisted onboarding closes deals</strong> — the onboarding and sales team is a real differentiator but is undersold on the site.<a class="cite" href="#r3">3</a><a class="cite" href="#r11">11</a></li>
+      <li><strong>Product gaps push prospects toward competitors</strong> — segmentation, analytics depth, and CRM functionality are the most frequently cited churn drivers at the complex-commerce tier.<a class="cite" href="#r6">6</a><a class="cite" href="#r7">7</a><a class="cite" href="#r8">8</a><a class="cite" href="#r9">9</a></li>
+      <li><strong>Overwhelm suppresses intent</strong> — even motivated buyers disengage because "there's too much" to evaluate without guidance.<a class="cite" href="#r10">10</a></li>
+    </ol>
+  </section>
+
+  <!-- ============== 1. PRICING ============== -->
+  <section class="section" id="pricing">
+    <h2><span class="section-num">1</span>💰 Pricing &amp; Plan Confusion</h2>
+    <p>
+      Mailchimp.com's pricing page and in-app plan selection are consistently cited as
+      a top barrier to account creation for midmarket-sized prospects. An internal
+      interview with the MC Dotcom Agent team summarized the VoC survey directly:
+    </p>
+    <blockquote>
+      <p>
+        "The main things that are reported on are: I'm unsure if the tools I use integrate with Mailchimp;
+        I'm confused about pricing; the content and terminology is confusing; there's too much effort to
+        switch or set up my account."
+      </p>
+      <cite>— <strong>Franco Reyes</strong>, MC Dotcom Agent Interview <a class="cite" href="#r1">1</a></cite>
+    </blockquote>
+    <p>
+      This mirrors qualitative findings across midmarket interviews — prospects describe
+      the pricing page as dense and the plan tiers as hard to differentiate without
+      talking to a person.
+    </p>
+    <p>
+      <strong>📐 Implication for web:</strong> The pricing page and plan-selection UX
+      are not just optimization surfaces; they are the primary blocker gating self-serve
+      midmarket signups.
+    </p>
+  </section>
+
+  <!-- ============== 2. CONTACT SALES ============== -->
+  <section class="section" id="contact-sales">
+    <h2><span class="section-num">2</span>📞 Contact-Sales Path &amp; Demos</h2>
+    <p>
+      When prospects <em>do</em> connect with sales, the experience is generally
+      positive — but the path from mailchimp.com to a sales conversation is not
+      obvious. A scaled-acquisition interview illustrates both the opportunity and the
+      discoverability issue; the interviewer had to <em>explicitly explain</em> how to
+      reach sales:
+    </p>
+    <blockquote>
+      <p>
+        "Another path that I think you could consider as someone that hasn't signed up
+        yet: if you search for Mailchimp sales, if you'd like to talk to one of our
+        salespeople and get some specific information or ask them to demo a certain
+        use case … that's another avenue that you could take."
+      </p>
+      <cite>— <strong>Moderator</strong>, Leslie / Southeast Psych (Prospect), Scaled Acquisition Qual <a class="cite" href="#r2">2</a></cite>
+    </blockquote>
+    <p>
+      In other words, the recommended route to reach sales is "Google it," not a clear
+      contact-sales CTA on the site.
+    </p>
+    <p>
+      Once in a sales motion, specialists are effective at closing. Interestingly, the
+      HubSpot-vs-Mailchimp journey captured in MIC Omnichannel workshops shows that
+      competitor sales reps sometimes recommend Mailchimp — reinforcing the value of
+      human-led evaluation at the midmarket tier:
+    </p>
+    <blockquote>
+      <p>
+        "Even in a demo with a great Sales Manager at HubSpot that was like, 'You don't
+        need to reinvent the wheel. You've got a great thing going with Mailchimp;
+        we integrate with it.'"
+      </p>
+      <cite>— <strong>Chase</strong>, Customer, MIC Omnichannel Workshops <a class="cite" href="#r4">4</a></cite>
+    </blockquote>
+    <p>
+      <strong>📐 Implication for web:</strong> The site undersells the value of talking
+      to a human. A clearer, higher-prominence Contact&nbsp;Sales CTA — especially on
+      pricing and plan-comparison pages — would capture prospects who self-identify as
+      midmarket but who currently fall back to Google search to reach sales.
+    </p>
+  </section>
+
+  <!-- ============== 3. ASSISTED ONBOARDING ============== -->
+  <section class="section" id="assisted">
+    <h2><span class="section-num">3</span>🤝 Sales-Assisted Onboarding</h2>
+    <p>
+      Mailchimp's human-assistance motion is relatively new, but VoC signals show it is
+      differentiating. A panelist on the Q2 FY23 Customer Panel described the shift
+      from pure self-serve to assisted:
+    </p>
+    <blockquote>
+      <p>
+        "Y'all have said Mailchimp has changed a lot, but … our sales team, our
+        onboarding team, even how big our customer success team is … it's all pretty
+        new for us to offer these sorts of human types of support and assistance."
+      </p>
+      <cite>— <strong>Moderator</strong>, Q2 FY23 Assisted Onboarding Panel <a class="cite" href="#r3">3</a></cite>
+    </blockquote>
+    <p>
+      Onboarding specialists in the Human Assistance Advisory Board described real
+      wins — including closing "one of our biggest deals" in EMEA — directly from the
+      sales-assisted onboarding motion.<a class="cite" href="#r11">11</a>
+    </p>
+    <p>
+      <strong>📐 Implication for web:</strong> Mailchimp.com should more prominently
+      surface human onboarding — it is a competitive moat against Klaviyo/HubSpot at
+      the midmarket tier and is currently undersold on the pricing and plans pages.
+    </p>
+  </section>
+
+  <!-- ============== 4. GAPS ============== -->
+  <section class="section" id="gaps">
+    <h2><span class="section-num">4</span>🧱 Product Gaps Driving Churn from Midmarket Accounts</h2>
+    <p>
+      While this report focuses on the sales experience, product gaps show up in VoC as
+      the reason midmarket prospects push back in sales conversations — or churn after
+      signup. These themes should inform both how sales positions plans and how the
+      website communicates midmarket-relevant capability.
+    </p>
+
+    <div class="theme-grid">
+      <div class="theme-card">
+        <div class="theme-card-head">🎯 Theme 4.1</div>
+        <h4>Segmentation limits</h4>
+        <p>Complex-commerce customers hit a hard ceiling and fall back to Excel to do real segmentation work.</p>
+      </div>
+      <div class="theme-card">
+        <div class="theme-card-head">🏷️ Theme 4.2</div>
+        <h4>Audience complexity</h4>
+        <p>Tags/groups/audiences model is confusing, especially for people inheriting legacy midmarket accounts.</p>
+      </div>
+      <div class="theme-card">
+        <div class="theme-card-head">🌀 Theme 4.3</div>
+        <h4>Learning-curve overwhelm</h4>
+        <p>"There's a lot Mailchimp can probably do … but it's overwhelming to know where to start."</p>
+      </div>
+    </div>
+
+    <h3>4.1 · Segmentation limits</h3>
+    <blockquote>
+      <p>
+        "All my segmentation had to be done in Excel because it was technically
+        impossible to do it in Mailchimp because I can't see it in front of me. …
+        Today we're emailing 20k, tomorrow we're emailing only 10k because we have a
+        distribution business and maybe a more niche business, which is consumer-based."
+      </p>
+      <cite>— <strong>Alexandra Stephenson</strong>, Headlam / Wavenet, July 2023 churn interview <a class="cite" href="#r7">7</a><a class="cite" href="#r8">8</a></cite>
+    </blockquote>
+    <blockquote>
+      <p>
+        "We had just way blown past the limits of what Mailchimp was able to do.
+        We couldn't run split tests while also excluding the segments we needed to
+        exclude. So we just had no use data ever. It was a horrible experience.
+        … The segmentation and the split testing was impossible to do."
+      </p>
+      <cite>— <strong>Chanelle / Leslie</strong>, Entertainment &amp; Leisure Prospect, Mailchimp ICP <a class="cite" href="#r9">9</a></cite>
+    </blockquote>
+
+    <h3>4.2 · Audience management complexity</h3>
+    <blockquote>
+      <p>
+        "I wish Mailchimp made it a little bit easier to make distinct audiences. It
+        is kind of complicated, and it takes so many steps. And the idea of adding tags
+        works if you are the first person working in Mailchimp … but you're taking over
+        a legacy account that has been around since the dawn of time, and there's 80
+        gazillion different tags, and you're like, oh, my God, can I get rid of some
+        of these tags?"
+      </p>
+      <cite>— <strong>Marcia</strong>, Marketing Generalist, Mailchimp ICP <a class="cite" href="#r6">6</a></cite>
+    </blockquote>
+
+    <h3>4.3 · "Too much" — learning-curve overwhelm</h3>
+    <blockquote>
+      <p>
+        "I also probably just need to spend more time trying to learn about Mailchimp
+        because there's a lot I know that Mailchimp can probably do … but it's a
+        little bit overwhelming to know where to start to get exactly what I'm kind of
+        looking for."
+      </p>
+      <cite>— <strong>Sarah</strong>, Complex Commerce Exploration <a class="cite" href="#r10">10</a></cite>
+    </blockquote>
+
+    <p>
+      <strong>📐 Implication for web:</strong> Midmarket-oriented site content should
+      (1) address the segmentation/analytics ceiling head-on with proof that Mailchimp
+      has scaled for similar customers, and (2) make the onboarding/migration-assist
+      offer concrete so prospects don't read "powerful but overwhelming" as a reason
+      to choose a competitor.
+    </p>
+  </section>
+
+  <!-- ============== 5. RECOMMENDATIONS ============== -->
+  <section class="section" id="recs">
+    <h2><span class="section-num">5</span>✅ Recommendations</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:36px">#</th>
+          <th>Recommendation</th>
+          <th>Rationale</th>
+          <th style="width:90px">Sources</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>Add a persistent, prominent <strong>Contact Sales / Request a Demo</strong> CTA to the pricing page and plan-comparison modules</td>
+          <td>Prospects currently find sales via Google search, not via the site</td>
+          <td><a class="cite" href="#r2">2</a></td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>Simplify the pricing page — reduce plan permutations shown above the fold; use an interactive selector for list-size-based pricing</td>
+          <td>Pricing confusion is the #1 named barrier to account creation</td>
+          <td><a class="cite" href="#r1">1</a></td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>Promote <strong>sales-assisted onboarding</strong> as a midmarket-specific benefit, with EMEA / US success examples</td>
+          <td>Human-assist is differentiating but undersold on the site</td>
+          <td><a class="cite" href="#r3">3</a><a class="cite" href="#r11">11</a></td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td>Publish midmarket-specific proof points (case studies, named logos) at the segmentation / analytics decision moment</td>
+          <td>Complex-commerce prospects doubt Mailchimp can scale with them</td>
+          <td><a class="cite" href="#r7">7</a><a class="cite" href="#r8">8</a><a class="cite" href="#r9">9</a></td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td>Add in-product and web <strong>"where do I start?"</strong> guided paths for first-time midmarket users</td>
+          <td>Overwhelm is itself a conversion killer</td>
+          <td><a class="cite" href="#r6">6</a><a class="cite" href="#r10">10</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============== METHODOLOGY ============== -->
+  <section class="methodology section" id="methodology">
+    <h3>🔬 Methodology</h3>
+    <ul>
+      <li><strong>Source system:</strong> HeyMarvin (<code>mcp.heymarvin.com</code>)</li>
+      <li><strong>Access:</strong> Authenticated via the HeyMarvin MCP server (OAuth, April 2026)</li>
+      <li><strong>Queries:</strong> Keyword search across transcripts and natural-language Ask AI queries, focused on pricing confusion, contact-sales/demo, segmentation limits, audience management, sales-assisted onboarding, and midmarket-specific feedback</li>
+      <li><strong>Project scope:</strong> Citations span 10+ projects including <em>Mailchimp ICP</em>, <em>Complex Commerce Exploration</em>, <em>Human Assistance Advisory Board</em>, <em>Scaled Acquisition Qual</em>, <em>XR &amp; CMI Churn Program</em>, <em>MIC Omnichannel Workshops</em>, <em>List Import Growth</em>, <em>Q2 FY23 Customer Panel (Assisted Onboarding)</em>, <em>Tech Programs Research Interviews</em>, and the <em>Sales &amp; Onboarding Advisory Board</em></li>
+    </ul>
+    <h3 style="margin-top:20px">⚠️ Limitations</h3>
+    <ul>
+      <li>VoC quotes are <strong>illustrative, not statistically representative</strong> — they capture themes, not frequencies. Prioritization should be validated against quantitative signals (funnel drop-off, CS ticket categories, NPS verbatims).</li>
+      <li>Some interviews predate the current mailchimp.com design and pricing page; themes persist but specific UI references may be outdated.</li>
+      <li>Ask AI output is LLM-summarized — the underlying transcripts (linked below) are the source of truth.</li>
+    </ul>
+    <h3 style="margin-top:20px">🔁 How to reproduce</h3>
+<pre><code>mcp__heymarvin__search query:"Mailchimp pricing confusing"   search_type:transcripts
+mcp__heymarvin__search query:"talk to sales demo Mailchimp"  search_type:transcripts
+mcp__heymarvin__search query:"segmentation impossible Mailchimp"
+mcp__heymarvin__search query:"overwhelmed Mailchimp get started"
+mcp__heymarvin__search query:"onboarding assisted Mailchimp"
+mcp__heymarvin__ask    question:"What VoC data do we have related to midmarket sales on mailchimp.com?"</code></pre>
+    <p style="font-size:.85rem;color:var(--mc-text-muted);margin-top:8px">
+      For verbatim transcripts, call <code>mcp__heymarvin__get_file_content</code> with
+      the <code>wav_id</code> values below.
+    </p>
+  </section>
+
+  <!-- ============== BIBLIOGRAPHY ============== -->
+  <section class="section" id="bibliography">
+    <h2><span class="section-num">📚</span>Bibliography</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:30px">#</th>
+          <th>Project</th>
+          <th>Interview / File</th>
+          <th>Speaker</th>
+          <th style="width:90px">Timestamp</th>
+          <th style="width:100px">wav_id</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="r1"><td>1</td><td>Tech Programs Research Interviews (37335)</td><td>Meeting — MC Dotcom Agent Interview</td><td>Franco Reyes</td><td>00:14:34</td><td>19266375</td></tr>
+        <tr id="r2"><td>2</td><td>Scaled Acquisition Qual (32205)</td><td>Leslie — SoutheastPsych — Prospect</td><td>Moderator</td><td>00:27:30</td><td>13841140</td></tr>
+        <tr id="r3"><td>3</td><td>Q2 FY23 Customer Panel: Assisted Onboarding (31812)</td><td>Q2 FY23 Customer Panel</td><td>Moderator</td><td>00:36:14</td><td>18070238</td></tr>
+        <tr id="r4"><td>4</td><td>MIC Omnichannel Workshops (41419)</td><td>Omnichannel Strategy &amp; Platform Decisions: Customers</td><td>Chase (Customer)</td><td>01:15:37</td><td>18825619</td></tr>
+        <tr id="r5"><td>5</td><td>HeyMarvin Ask AI synthesis</td><td colspan="3">Summary reference (request bdb9767d-…)</td><td>—</td></tr>
+        <tr id="r6"><td>6</td><td>Mailchimp: Ideal Customer Profiles — ICP (26558)</td><td>Marcia — Marketing Generalist</td><td>Marcia</td><td>00:26:53</td><td>9602618</td></tr>
+        <tr id="r7"><td>7</td><td>List Import Growth (33075)</td><td>Churn Interview — Alexandra Stephenson (2023-07-17)</td><td>Alexandra Stephenson</td><td>00:09:27</td><td>14185504</td></tr>
+        <tr id="r8"><td>8</td><td>XR &amp; CMI Churn Program (31391)</td><td>Alexandra Stephenson, Headlam (+Wavenet), July 2023</td><td>Alexandra Stephenson</td><td>00:09:21</td><td>13521030</td></tr>
+        <tr id="r9"><td>9</td><td>Mailchimp: Ideal Customer Profiles — ICP (26558)</td><td>ChanelleLeslie — Prospect — Entertainment/Leisure</td><td>Chanelle / Leslie</td><td>00:27:09</td><td>9901131</td></tr>
+        <tr id="r10"><td>10</td><td>Complex Commerce Exploration (32194)</td><td>Interview with Sarah</td><td>Sarah</td><td>00:29:23</td><td>13836649</td></tr>
+        <tr id="r11"><td>11</td><td>Human Assistance Advisory Board (32298)</td><td>September HAAB Post-sales Roundtable</td><td>Jen (Onboarding Specialist)</td><td>00:07:40</td><td>13890528</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.85rem;color:var(--mc-text-muted);margin-top:16px">
+      <strong>Related projects reviewed</strong> (not directly quoted): Q4 2021 Customer
+      Panel: Premium Customers who connected with Sales; AU — Mailchimp MM ICP research;
+      Mailchimp Fusion / Lead to Cash; Generative Research — PnP/Pricing Pages; CX
+      Elaboration: DTP, Pricing Page; Customer Funnel Customization; 2025 MC Wayfinding;
+      FY26 Q1 Mailchimp Messaging Refresh Analysis; Vibe Apps MM IES; FY26 Q1 Upper
+      Midmarket ($100M+) Insights.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <p>
+    <span class="brand">Mailchimp</span> · Web Growth · Voice of Customer ·
+    Sourced from HeyMarvin · April 2026
+  </p>
+</footer>
+
+</body>
+</html>
